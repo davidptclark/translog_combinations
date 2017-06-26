@@ -1,0 +1,7 @@
+*
+
+!.gitignore
+!README.md
+!translog_combinations.py
+
+!*/
