@@ -1,6 +1,8 @@
 #This is a Python script that, for a given list of strings(variables), will
 #create all the possible permutations of products, including own and cross
 #products.
+import itertools
+
 separator = "*";
 VarList = ["y","lp","ep","rmp","cmp","cp","fp"]
 n = len(VarList)
@@ -19,6 +21,19 @@ for currVar in VarList:
             if currText not in newVarList:
                 newVarList.append(currText)
 
+newGenList = [];
+
+currPosition = 0
+for currVar in VarList:
+    currPosition +=1
+    nextPosition = 0
+    for nextVar in VarList:
+        nextPosition+=1
+        if currPosition <= nextPosition:
+            currText = currVar + nextVar
+            if currText not in newGenList:
+                newGenList.append(currText)
+
 #Check the number of combinations os correct, should equate to (n!/(r!(n-r)!)+n)
 # the added n is for squares of the variable.
 import operator as op
@@ -35,4 +50,8 @@ actual = len(newVarList)
 print actual
 
 actual == possible
-print((' '.join(map(str, newVarList))))
+#newVarList = (' '.join(map(str, newVarList)))
+#newGenList = (' '.join(map(str, newGenList)))
+
+for f,b in zip(newGenList,newVarList):
+    print("gen " + str(f) + " = " + "ln(" + str(b) + ")")
